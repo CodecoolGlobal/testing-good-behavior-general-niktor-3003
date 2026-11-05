@@ -5,6 +5,12 @@ checkout on **2026-11-04**. The manual observations were reported on this
 machine; environment versions were collected afterward rather than captured
 separately at the time of each observation.
 
+The application commit was rechecked on **2026-11-05** and remained
+`e6796516b1d4d4d667828099e104969a9d4f1ce8`, with no local changes reported by
+Git. The [final archived run](test-results/README.md) was produced on
+2026-11-05. The version table below remains the 2026-11-04 environment
+snapshot, rather than a claim that every component was remeasured per run.
+
 ## Application environment
 
 | Item | Value |
@@ -37,6 +43,13 @@ the versions in the tester's server terminals were not independently checked.
 | Cucumber Java / JUnit Platform Engine / PicoContainer | 7.20.1 |
 | JUnit Jupiter API | 5.11.3 |
 | JUnit Platform Suite | 1.11.3 |
+| API request client | Java `java.net.http.HttpClient` |
+| API JSON parsing | Selenium `org.openqa.selenium.json.Json` |
+| Scenario groups | `@ui` and `@api`; browser hooks apply only to `@ui` |
+
+The archived suite was executed through `RunCucumberTest` in IntelliJ IDEA.
+A separate command-line Maven execution was not performed as part of the
+documentation update.
 
 ## Test data considerations
 

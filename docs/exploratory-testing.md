@@ -4,9 +4,11 @@
 
 Application: Gotta Fetch 'Em All — Dugtrio.
 
-These notes record manual observations reported by the tester during the
-guided testing session, supported by supplied screenshots. They are not
-independent executions by the assistant.
+The manual observations below were reported by the tester during the
+guided testing session and are supported by supplied screenshots. Automated
+results are taken from the tester's archived report, which was inspected
+after execution. The assistant did not independently rerun the suite for
+this documentation update.
 
 The application lets players choose locations, encounter Pokémon, select
 owned Pokémon and battle opponents. A victory can add the opponent to the
@@ -100,20 +102,37 @@ was not confirmed.
   specifies `front_default`; compliance with the required sprite source
   has not been established by the existing image visibility checks.
 
-## Automated checks reported by the tester
+## Final automated results
 
-The tester reported successful execution of these four scenarios:
+The archived run on **2026-11-05** contains **8 scenarios: 7 passed and
+1 failed**. Both API scenarios passed; five of the six UI scenarios passed.
+The JSON report was inspected to confirm the statuses and failure reason.
 
-1. Display 20 locations.
-2. Start an encounter by selecting a location.
-3. Select an owned Pokémon before battle.
-4. Return to locations without starting a battle.
+- [Scenario-by-scenario results](test-results/README.md).
+- [Archived HTML report](test-results/cucumber-report-2026-11-05.html).
+- [Archived JSON report](test-results/cucumber-report-2026-11-05.json).
 
-An additional scenario, **Return from a location without Pokemon**, was
-reported to fail at the exact no-encounter message comparison, detecting
-[BUG-002](bug-reports/BUG-002-no-encounter-message-text.md). Its subsequent
-navigation steps are skipped after the failure, so this run does not
-verify the return navigation automatically.
+**Display the required no-encounter message** fails at the exact-text
+assertion, detecting [BUG-002](bug-reports/BUG-002-no-encounter-message-text.md).
+**Return from a location without Pokemon** is a separate scenario and passes,
+including navigation back to 20 displayed locations and disappearance of
+the encounter section. The text discrepancy no longer prevents that
+navigation check from running.
+
+The two API scenarios verify the backend health response and a non-empty
+owned Pokémon list containing string entries with the expected PokéAPI URL
+prefix. They do not check POST behavior or fetch each returned URL.
+
+## Automation stability observation
+
+An earlier run timed out while waiting for the no-encounter message at
+`spring-path`, although the next scenario using that location passed.
+The final archived run reached the expected text comparison instead.
+The earlier timeout's cause has not been established. Failure screenshots
+are now attached by the UI teardown hook to help investigate recurrence;
+the later screenshot does not explain the earlier timeout.
+
+## Coverage limits
 
 These checks do not establish complete coverage of the application.
 In particular, the location count check does not verify the identities

@@ -57,12 +57,16 @@ location list. No navigation failure is attributed to this text discrepancy.
 
 The tester confirmed that the exact-text assertion in
 `LocationSteps.verifyNoEncounterMessage()` reports this difference.
-The scenario is named **Return from a location without Pokemon** in
+The scenario is named **Display the required no-encounter message** in
 `src/test/resources/features/locations.feature`.
 
-Because the assertion fails before the return action, the subsequent
-navigation steps in that scenario are skipped. The failed run therefore
-does not establish an automated result for those navigation steps.
+The [archived run on 2026-11-05](../test-results/README.md) confirms the
+assertion failure at **the no-encounter message should match the requirement**.
+The HTML report includes the failure screenshot attached by the teardown hook.
+
+Return navigation is checked independently in **Return from a location
+without Pokemon**, which passes in the same run. The failed text assertion
+does not prevent that separate scenario from executing.
 
 ## Developer communication
 

@@ -87,6 +87,13 @@ durations were not recorded.
 Observed in two completed battles: once after victory and once after defeat.
 Further repetitions on each path are needed to establish consistency.
 
+## Automated coverage
+
+This issue is supported by the manual observations above. The final
+automated suite does not start a battle or check post-battle navigation.
+Its passing leave-encounter scenarios cover leaving before battle or
+returning from an empty location, not this defect.
+
 ## Developer communication
 
 Not yet shared with the developers. Add the sharing date and a link to the
