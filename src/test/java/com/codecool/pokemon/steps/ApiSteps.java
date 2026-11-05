@@ -8,9 +8,13 @@ import org.openqa.selenium.json.Json;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ApiSteps {
     private ApiClient apiClient;
@@ -41,5 +45,32 @@ public class ApiSteps {
 
         assertEquals(expectedValue, jsonBody.get(fieldName),
                 "The JSON field should be match the expected value: " + fieldName);
+    }
+
+    @Then("the response should contain a non-empty list of Pokemon URLs")
+    public void verifyPokemonUrlList() {
+        Map<?, ?> jsonBody = new Json().toType(
+                response.body(),
+                Map.class);
+
+        List<?> pokemonUrls = assertInstanceOf(
+                List.class,
+                jsonBody.get("pokemons"),
+                "The pokemons field should contain a list."
+        );
+
+        assertFalse(pokemonUrls.isEmpty(),
+                "The Pokemon list should not be empty.");
+
+        for (Object item : pokemonUrls) {
+            String pokemonUrl = assertInstanceOf(
+                    String.class,
+                    item,
+                    "Each Pokemon entry should be a string."
+            );
+
+            assertTrue(pokemonUrl.startsWith("https://pokeapi.co/api/v2/pokemon/"),
+                    "Each entry should reference the Pokemon endpoint: " + pokemonUrl);
+        }
     }
 }
