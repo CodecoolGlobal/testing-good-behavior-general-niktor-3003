@@ -1,0 +1,37 @@
+name: Elso CI 
+
+  
+
+on: 
+
+  push: 
+
+  pull_request: 
+
+  workflow_dispatch: 
+
+  
+
+permissions: 
+
+  contents: read 
+
+  
+
+jobs: 
+
+  ellenorzes: 
+
+    runs-on: ubuntu-latest 
+
+    timeout-minutes: 5 
+
+    steps: 
+
+      - name: Uzenet a futtatogeprol 
+
+        run: echo "Ez a GitHub gepen fut." 
+
+      - name: Egyszeru ellenorzes 
+
+        run: test "$((2 + 2))" -eq 4 
