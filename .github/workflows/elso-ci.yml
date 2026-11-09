@@ -34,4 +34,4 @@ jobs:
 
       - name: Egyszeru ellenorzes 
 
-        run: test "$((2 + 2))" -eq 4 
+        run: test "$((2 + 2))" -eq 5
